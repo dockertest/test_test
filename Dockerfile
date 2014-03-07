@@ -1,6 +1,6 @@
-from ubuntu:12.04
-ENV DEBIAN_FRONTEND noninteractive
-RUN echo 'deb http://archive.ubuntu.com/ubuntu precise main universe' > \
-    /etc/apt/sources.list; apt-get update
-RUN apt-get install -y --no-install-recommends  python2.7
-CMD ["/bin/sh", "-c", "python -c 'import sys; print sys.version; print sys.version_info'"]
+FROM    fedora:latest
+MAINTAINER  Navid Shaikh <nshaikh@redhat.com>
+RUN     yum -y update --skip-broken
+RUN     yum install -y redis
+EXPOSE  6379
+ENTRYPOINT  ["/usr/bin/redis-server"]
